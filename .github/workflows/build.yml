@@ -16,6 +16,7 @@ jobs:
       - name: Checkout kernel source
         uses: actions/checkout@v4
         with:
+          repository: kho447520-jpg/Eureka-Kernel  # <-- THÊM DÒNG NÀY
           ref: ${{ env.KERNEL_BRANCH }}
           path: kernel
           fetch-depth: 0
@@ -37,7 +38,7 @@ jobs:
           git checkout v3.3.0
           cd ..
 
-      # 2. Cấu hình KSU vào defconfig (Code cốt lõi bạn cần)
+      # 2. Cấu hình KSU vào defconfig
       - name: Enable KernelSU in defconfig
         working-directory: ./kernel
         run: |
@@ -82,7 +83,6 @@ jobs:
           export PLATFORM_VERSION=11
           make O=out ARCH=arm64 ANDROID_MAJOR_VERSION=r exynos7885-a10_defconfig
 
-      # 3. Build Kernel (Code cốt lõi)
       - name: Build kernel
         working-directory: ./kernel
         run: |
